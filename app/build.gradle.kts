@@ -2,6 +2,8 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.compose)
+    alias(libs.plugins.hilt.gradle) // Added for Hilt
+    alias(libs.plugins.ksp)         // Added for KSP
 }
 
 android {
@@ -50,6 +52,15 @@ dependencies {
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
     testImplementation(libs.junit)
+
+    // Hilt
+    implementation(libs.hilt.android) // Added Hilt dependency
+    ksp(libs.hilt.compiler)          // Added Hilt compiler with KSP
+
+    // Retrofit & Moshi
+    implementation(libs.retrofit)                // Added Retrofit dependency
+    implementation(libs.retrofit.converter.moshi) // Added Moshi converter for Retrofit
+
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
