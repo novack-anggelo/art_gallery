@@ -60,6 +60,7 @@ dependencies {
     // Retrofit & Moshi
     implementation(libs.retrofit)                // Added Retrofit dependency
     implementation(libs.retrofit.converter.moshi) // Added Moshi converter for Retrofit
+    implementation(libs.androidx.navigation.compose)
 
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
