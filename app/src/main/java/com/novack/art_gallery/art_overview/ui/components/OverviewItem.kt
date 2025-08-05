@@ -70,7 +70,7 @@ fun OverviewItem(
                     modifier = Modifier
                         .weight(1f)
                         .padding(start = Padding.SizeXXS),
-                    maxLines = 1,
+                    maxLines = 2,
                     overflow = TextOverflow.Ellipsis
                 )
             }
