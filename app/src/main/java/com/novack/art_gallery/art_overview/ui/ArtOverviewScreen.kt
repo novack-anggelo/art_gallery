@@ -39,7 +39,7 @@ fun ArtOverviewScreen(
 
 @Composable
 private fun LoadedContent(param: ArtOverviewParam.Loaded, onPreviewClick: (String) -> Unit) {
-    LazyColumn(modifier = Modifier.fillMaxWidth().padding(horizontal = Padding.SizeXS)) {
+    LazyColumn(modifier = Modifier.fillMaxWidth().padding(Padding.SizeXS)) {
         items(param.artPieces) { overview ->
             OverviewItem(
                 param = overview,

@@ -18,7 +18,7 @@ internal fun ArtworksOverviewState.toParam() = when(this) {
 
 private fun ArtworkOverview.toParam() = ArtOverviewItemParam(
     id = id,
-    artist = artist.orEmpty(),
+    artist = artist,
     title = title,
     thumbnailUrl = thumbnailUrl,
 )

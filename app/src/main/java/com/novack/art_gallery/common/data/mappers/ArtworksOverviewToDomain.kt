@@ -7,7 +7,7 @@ import com.novack.art_gallery.common.data.model.OverviewResponseDTO
 private const val iiifImageBaseUrl = "https://www.artic.edu/iiif/2/"
 private const val imageSize = "/full/843,/0/default.jpg"
 
-internal fun OverviewResponseDTO.toDomain() = data.map {
+internal fun OverviewResponseDTO.toDomain() = data.filter { it.imageId != null}.map {
     it.toDomain()
 }
 

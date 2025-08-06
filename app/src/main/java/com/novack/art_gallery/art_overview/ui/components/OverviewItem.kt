@@ -17,6 +17,7 @@ import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -73,7 +74,7 @@ fun OverviewItem(
                     }
                 )
                 Text(
-                    text = param.title,
+                    text = param.title ?: stringResource(R.string.title_unknown),
                     style = MaterialTheme.typography.bodyLarge,
                     modifier = Modifier
                         .weight(1f)
@@ -84,7 +85,7 @@ fun OverviewItem(
             }
             Box(modifier = Modifier.fillMaxWidth(), contentAlignment = Alignment.CenterEnd) {
                 Text(
-                    text = param.artist,
+                    text = param.artist ?: stringResource(R.string.artist_unknown),
                     style = MaterialTheme.typography.bodySmall,
                     modifier = Modifier.padding(top = Padding.SizeXXXXS)
                 )

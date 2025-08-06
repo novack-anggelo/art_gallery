@@ -16,7 +16,7 @@ sealed interface ArtOverviewParam {
 
 data class ArtOverviewItemParam(
     val id: String,
-    val artist: String,
-    val title: String,
+    val artist: String?,
+    val title: String?,
     val thumbnailUrl: String,
 )
