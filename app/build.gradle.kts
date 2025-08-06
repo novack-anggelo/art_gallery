@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.novack.art_gallery.HiltTestRunner" // Custom runner for Hilt
     }
 
     buildTypes {
@@ -55,24 +55,28 @@ dependencies {
     testImplementation(libs.junit)
 
     // Hilt
-    implementation(libs.hilt.android) // Added Hilt dependency
-    ksp(libs.hilt.compiler)          // Added Hilt compiler with KSP
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
+    androidTestImplementation(libs.hilt.android.testing) // Hilt testing
+    kspAndroidTest(libs.hilt.compiler) // Hilt compiler for tests
 
     // Retrofit & Moshi
-    implementation(libs.retrofit)                // Added Retrofit dependency
-    implementation(libs.retrofit.converter.moshi) // Added Moshi converter for Retrofit
-    implementation(libs.moshi.kotlin)             // Moshi kotlin support
-    ksp(libs.moshi.kotlin.codegen)                // Moshi code gen
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.compose)
 
+    // Testing
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
-    testImplementation(libs.mockk.android)
-    testImplementation(libs.kotlinx.coroutines.test)
+    androidTestImplementation(libs.mockk.android) // MockK for instrumentation tests
 
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)

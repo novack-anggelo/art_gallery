@@ -15,7 +15,9 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.unit.dp
@@ -27,6 +29,8 @@ import com.novack.art_gallery.ui.common.IconSize
 import com.novack.art_gallery.ui.common.Padding
 import com.novack.art_gallery.ui.theme.Art_galleryTheme
 
+const val OVERVIEW_ITEM_TEST_TAG = "overview_item"
+
 @Composable
 fun OverviewItem(
     param: ArtOverviewItemParam,
@@ -35,15 +39,19 @@ fun OverviewItem(
 ) {
     Card(
         onClick = { onClick(param.id) },
-        modifier = modifier.fillMaxWidth(),
+        modifier = modifier
+            .fillMaxWidth()
+            .testTag(OVERVIEW_ITEM_TEST_TAG),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
         Column(
-            modifier = Modifier.padding(
-                horizontal = Padding.SizeXS,
-                vertical = Padding.SizeXXS,
-            )
+            modifier = Modifier
+                .padding(
+                    horizontal = Padding.SizeXS,
+                    vertical = Padding.SizeXXS,
+                )
+                .semantics(mergeDescendants = true) {}
         ) {
             Row(verticalAlignment = Alignment.Bottom) {
                 AsyncImage(
