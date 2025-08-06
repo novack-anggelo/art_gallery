@@ -15,4 +15,7 @@ class OnlineRepository @Inject constructor(
         api.getArtworksOverview().toDomain()
     }
 
+    override suspend fun getArtworkDetails(id: String) = withContext(dispatcher) {
+        api.getArtworkDetails(id).toDomain()
+    }
 }

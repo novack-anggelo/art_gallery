@@ -1,6 +1,8 @@
 package com.novack.art_gallery.common.data
 
 import com.novack.art_gallery.common.data.mappers.toDomain
+import com.novack.art_gallery.common.data.model.ArtworkDetailsDTO
+import com.novack.art_gallery.common.data.model.ArtworkDetailsDataDTO
 import com.novack.art_gallery.common.data.model.OverviewDataDTO
 import com.novack.art_gallery.common.data.model.OverviewResponseDTO
 import com.novack.art_gallery.common.data.retrofit.RetrofitNetwork
@@ -29,7 +31,7 @@ class OnlineRepositoryTest {
 
     @Test
     fun `getArtworksOverview successful response`() = runTest(testDispatcher) {
-        // Arrange
+        // given
         val fakeArtworksDTO = OverviewResponseDTO(
             data = listOf(
                 OverviewDataDTO(
@@ -49,32 +51,64 @@ class OnlineRepositoryTest {
         val expectedArtworks = fakeArtworksDTO.data.map { it.toDomain() }
         coEvery { retrofitNetwork.getArtworksOverview() } returns fakeArtworksDTO
 
-        // Act
+        // when
         val result = repository.getArtworksOverview()
 
-        // Assert
+        // then
         assertEquals(expectedArtworks, result)
     }
 
     @Test
     fun `getArtworksOverview empty list response`() = runTest(testDispatcher) {
-        // Arrange
+        // given
         val fakeEmptyDTO = OverviewResponseDTO(data = emptyList())
         coEvery { retrofitNetwork.getArtworksOverview() } returns fakeEmptyDTO
 
-        // Act
+        // when
         val result = repository.getArtworksOverview()
 
-        // Assert
+        // then
         assert(result.isEmpty())
     }
 
     @Test(expected = IOException::class)
     fun `getArtworksOverview API error handling`() = runTest(testDispatcher) {
-        // Arrange
+        // given
         coEvery { retrofitNetwork.getArtworksOverview() } throws IOException("Network error")
 
-        // Act
+        // then
         repository.getArtworksOverview()
+    }
+
+    @Test
+    fun `getArtworkDetails successful response`() = runTest(testDispatcher) {
+        // given
+        val fakeArtworkDetailsDTO = ArtworkDetailsDTO(
+            data = ArtworkDetailsDataDTO(
+                id = 1,
+                title = "Mona Lisa",
+                description = "Iconic portrait of Lisa Gherardini",
+                date = "1503-15",
+                artist = "Leonardo da Vinci",
+                imageId = "id1"
+            )
+            )
+        val expectedArtwork = fakeArtworkDetailsDTO.toDomain()
+        coEvery { retrofitNetwork.getArtworkDetails("1")} returns fakeArtworkDetailsDTO
+
+        // when
+        val result = repository.getArtworkDetails("1")
+
+        // then
+        assertEquals(expectedArtwork, result)
+    }
+
+    @Test(expected = IOException::class)
+    fun `getArtworkDetails API error handling`() = runTest(testDispatcher) {
+        // given
+        coEvery { retrofitNetwork.getArtworkDetails(any()) } throws IOException("Network error")
+
+        // then
+        repository.getArtworkDetails("1")
     }
 }
