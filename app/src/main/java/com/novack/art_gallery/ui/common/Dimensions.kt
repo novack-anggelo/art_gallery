@@ -12,3 +12,7 @@ object Padding {
 object IconSize {
     val Thumbnail = 64.dp
 }
+
+object ImageSize {
+    val SizeM = 200.dp
+}

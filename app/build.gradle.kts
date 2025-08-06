@@ -39,6 +39,20 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            excludes.add("META-INF/LICENSE-notice.md")
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE-note.txt")
+            excludes.add("META-INF/LICENSE")
+            excludes.add("META-INF/license.txt")
+            excludes.add("META-INF/NOTICE")
+            excludes.add("META-INF/notice.txt")
+            excludes.add("META-INF/ASL2.0") // Apache License 2.0
+            excludes.add("META-INF/*.kotlin_module")
+        }
+    }
 }
 
 dependencies {
