@@ -8,6 +8,6 @@
     <string name="art_details_description">Description: %s</string>"
     <string name="art_details_date">Date: %s</string>"
     <string name="art_details_artist">Artist: %s</string>"
-    <string name="art_details_no_description">Description: No description available</string>
-    <string name="art_details_date_unknown">Date: Unknown</string>
+    <string name="art_details_no_description">No description available</string>
+    <string name="art_details_date_unknown">Unknown</string>
 </resources>

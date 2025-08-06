@@ -12,8 +12,8 @@ data class ArtworkDetailsDTO(
 data class ArtworkDetailsDataDTO(
     val id: Int,
     val title: String?,
-    val description: String?,
-    val date: String?,
-    val artist: String?,
+    @Json(name = "medium_display")val description: String?,
+    @Json(name = "date_display") val date: String?,
+    @Json(name = "artist_title")val artist: String?,
     @Json(name = "image_id") val imageId: String?,
 )
