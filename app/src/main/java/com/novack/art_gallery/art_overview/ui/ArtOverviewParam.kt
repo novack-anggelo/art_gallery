@@ -7,6 +7,8 @@ sealed interface ArtOverviewParam {
 
     data object Loading : ArtOverviewParam
 
+    data object Error : ArtOverviewParam
+
     data class Loaded(
         val artPieces: ImmutableList<ArtOverviewItemParam>,
     ) : ArtOverviewParam

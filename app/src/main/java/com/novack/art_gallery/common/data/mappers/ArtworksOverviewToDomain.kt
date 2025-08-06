@@ -15,5 +15,5 @@ internal fun OverviewDataDTO.toDomain() = ArtworkOverview(
     id = id.toString(),
     title = title,
     artist = artistName,
-    thumbnailUrl = "$iiifImageBaseUrl$id$imageSize",
+    thumbnailUrl = "$iiifImageBaseUrl$imageId$imageSize",
 )

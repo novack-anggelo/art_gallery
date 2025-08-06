@@ -32,5 +32,6 @@ internal class ArtOverviewScreenParamProvider : PreviewParameterProvider<ArtOver
                     ),
                 )
             ),
+            ArtOverviewParam.Error,
         )
 }

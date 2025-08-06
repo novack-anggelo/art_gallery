@@ -57,10 +57,13 @@ dependencies {
     // Hilt
     implementation(libs.hilt.android) // Added Hilt dependency
     ksp(libs.hilt.compiler)          // Added Hilt compiler with KSP
+    implementation(libs.androidx.hilt.navigation.compose)
 
     // Retrofit & Moshi
     implementation(libs.retrofit)                // Added Retrofit dependency
     implementation(libs.retrofit.converter.moshi) // Added Moshi converter for Retrofit
+    implementation(libs.moshi.kotlin)             // Moshi kotlin support
+    ksp(libs.moshi.kotlin.codegen)                // Moshi code gen
     implementation(libs.androidx.navigation.compose)
     implementation(libs.coil.compose)
 
