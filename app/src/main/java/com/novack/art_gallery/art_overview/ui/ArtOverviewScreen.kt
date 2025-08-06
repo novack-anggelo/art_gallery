@@ -1,10 +1,12 @@
 package com.novack.art_gallery.art_overview.ui
 
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.material3.Scaffold
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.PreviewLightDark
@@ -20,26 +22,28 @@ fun ArtOverviewScreen(
     param: ArtOverviewParam,
     onPreviewClick: (String) -> Unit,
 ) {
-    when(param) {
-        is ArtOverviewParam.Loaded -> {
-            LoadedContent(
-                param = param,
-                onPreviewClick = onPreviewClick
-            )
-        }
-        ArtOverviewParam.Loading -> {
-            LoadingScreen(modifier = Modifier.fillMaxSize())
-        }
-        ArtOverviewParam.Error -> {
-            ErrorScreen(modifier = Modifier.fillMaxSize())
+    Scaffold { paddingValues ->
+        when(param) {
+            is ArtOverviewParam.Loaded -> {
+                LoadedContent(
+                    param = param,
+                    paddingValues = paddingValues,
+                    onPreviewClick = onPreviewClick
+                )
+            }
+            ArtOverviewParam.Loading -> {
+                LoadingScreen(modifier = Modifier.fillMaxSize().padding(paddingValues))
+            }
+            ArtOverviewParam.Error -> {
+                ErrorScreen(modifier = Modifier.fillMaxSize().padding(paddingValues))
+            }
         }
     }
-
 }
 
 @Composable
-private fun LoadedContent(param: ArtOverviewParam.Loaded, onPreviewClick: (String) -> Unit) {
-    LazyColumn(modifier = Modifier.fillMaxWidth().padding(Padding.SizeXS)) {
+private fun LoadedContent(param: ArtOverviewParam.Loaded, paddingValues: PaddingValues, onPreviewClick: (String) -> Unit) {
+    LazyColumn(modifier = Modifier.fillMaxWidth().padding(paddingValues).padding(Padding.SizeXS)) {
         items(param.artPieces) { overview ->
             OverviewItem(
                 param = overview,

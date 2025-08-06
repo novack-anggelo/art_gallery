@@ -62,7 +62,7 @@ fun OverviewItem(
                         .build(),
                     placeholder = painterResource(R.drawable.ic_art_placeholder),
                     error = painterResource(R.drawable.ic_art_error),
-                    contentDescription = "Thumbnail for art piece ${param.title}",
+                    contentDescription = null,
                     contentScale = ContentScale.Crop, // Crop to fill the bounds
                     modifier = Modifier
                         .size(IconSize.Thumbnail),
