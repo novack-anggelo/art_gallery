@@ -13,6 +13,9 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
+import com.novack.art_gallery.art_details.ui.ArtDetailsScreen
+import com.novack.art_gallery.art_details.ui.ArtworkDetailsViewModel
+import com.novack.art_gallery.art_details.ui.mappers.toParam
 import com.novack.art_gallery.art_overview.ui.ArtOverviewScreen
 import com.novack.art_gallery.art_overview.ui.ArtworkOverviewViewModel
 import com.novack.art_gallery.art_overview.ui.mappers.toParam
@@ -38,18 +41,25 @@ class MainActivity : ComponentActivity() {
 
                         ArtOverviewScreen(
                             param = state.toParam(),
-                            onPreviewClick = {},
+                            onPreviewClick = {
+                                navController.navigate(AppScreens.ArtDetails.createRoute(it))
+                            },
                         )
                     }
                     composable(
                         route = AppScreens.ArtDetails.route,
                         arguments = listOf(navArgument("artworkId") {
                             type = NavType.StringType
-                            nullable = true
+                            nullable = false
                         })
                     ) { backStackEntry ->
-                        val artworkId = backStackEntry.arguments?.getString("artworkId")
-                        Text("Art Details Screen. ID: ${artworkId ?: "None"}")
+                        val viewModel: ArtworkDetailsViewModel = hiltViewModel()
+                        val state by viewModel.fetchState.collectAsStateWithLifecycle()
+
+                        ArtDetailsScreen(
+                            param = state.toParam(),
+                            onBackClick = navController::popBackStack
+                        )
                     }
                 }
             }
