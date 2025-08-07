@@ -17,7 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
 
-        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner = "com.novack.art_gallery.HiltTestRunner" // Custom runner for Hilt
     }
 
     buildTypes {
@@ -39,6 +39,20 @@ android {
     buildFeatures {
         compose = true
     }
+
+    packaging {
+        resources {
+            excludes.add("META-INF/LICENSE-notice.md")
+            excludes.add("META-INF/LICENSE.md")
+            excludes.add("META-INF/LICENSE-note.txt")
+            excludes.add("META-INF/LICENSE")
+            excludes.add("META-INF/license.txt")
+            excludes.add("META-INF/NOTICE")
+            excludes.add("META-INF/notice.txt")
+            excludes.add("META-INF/ASL2.0") // Apache License 2.0
+            excludes.add("META-INF/*.kotlin_module")
+        }
+    }
 }
 
 dependencies {
@@ -51,20 +65,34 @@ dependencies {
     implementation(libs.androidx.ui.graphics)
     implementation(libs.androidx.ui.tooling.preview)
     implementation(libs.androidx.material3)
+    implementation(libs.kotlinx.collections.immutable)
     testImplementation(libs.junit)
 
     // Hilt
-    implementation(libs.hilt.android) // Added Hilt dependency
-    ksp(libs.hilt.compiler)          // Added Hilt compiler with KSP
+    implementation(libs.hilt.android)
+    ksp(libs.hilt.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+    androidTestImplementation(libs.hilt.android.testing) // Hilt testing
+    kspAndroidTest(libs.hilt.compiler) // Hilt compiler for tests
 
     // Retrofit & Moshi
-    implementation(libs.retrofit)                // Added Retrofit dependency
-    implementation(libs.retrofit.converter.moshi) // Added Moshi converter for Retrofit
+    implementation(libs.retrofit)
+    implementation(libs.retrofit.converter.moshi)
+    implementation(libs.moshi.kotlin)
+    ksp(libs.moshi.kotlin.codegen)
+    implementation(libs.androidx.navigation.compose)
+    implementation(libs.coil.compose)
 
+    // Testing
+    testImplementation(libs.mockk.android)
+    testImplementation(libs.kotlinx.coroutines.test)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     androidTestImplementation(platform(libs.androidx.compose.bom))
     androidTestImplementation(libs.androidx.ui.test.junit4)
+    androidTestImplementation(libs.mockk.android) // MockK for instrumentation tests
+
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
+
 }
