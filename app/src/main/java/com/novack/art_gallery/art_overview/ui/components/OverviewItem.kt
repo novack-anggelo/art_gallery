@@ -42,7 +42,7 @@ fun OverviewItem(
         onClick = { onClick(param.id) },
         modifier = modifier
             .fillMaxWidth()
-            .testTag(OVERVIEW_ITEM_TEST_TAG),
+            .testTag("$OVERVIEW_ITEM_TEST_TAG${param.id}"),
         shape = MaterialTheme.shapes.medium,
         elevation = CardDefaults.cardElevation(defaultElevation = 2.dp)
     ) {
