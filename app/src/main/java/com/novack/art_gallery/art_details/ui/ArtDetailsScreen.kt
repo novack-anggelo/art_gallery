@@ -17,19 +17,32 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.semantics
 import androidx.compose.ui.tooling.preview.PreviewLightDark
 import androidx.compose.ui.tooling.preview.PreviewParameter
-import androidx.compose.ui.unit.sp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.novack.art_gallery.R
+import com.novack.art_gallery.art_details.ui.ArtDetailsTestTags.ARTIST_TEST_TAG
+import com.novack.art_gallery.art_details.ui.ArtDetailsTestTags.DATE_TEST_TAG
+import com.novack.art_gallery.art_details.ui.ArtDetailsTestTags.DESCRIPTION_TEST_TAG
+import com.novack.art_gallery.art_details.ui.ArtDetailsTestTags.LOADED_CONTENT_TEST_TAG
+import com.novack.art_gallery.art_details.ui.ArtDetailsTestTags.TITLE_TEST_TAG
 import com.novack.art_gallery.common.ui.screens.ErrorScreen
 import com.novack.art_gallery.common.ui.screens.LoadingScreen
 import com.novack.art_gallery.ui.common.ImageSize
 import com.novack.art_gallery.ui.common.Padding
+
+object ArtDetailsTestTags {
+    const val LOADED_CONTENT_TEST_TAG = "art_details_loaded_content"
+    const val TITLE_TEST_TAG = "art_details_title"
+    const val DESCRIPTION_TEST_TAG = "art_details_description"
+    const val DATE_TEST_TAG = "art_details_date"
+    const val ARTIST_TEST_TAG = "art_details_artist"
+}
 
 @Composable
 fun ArtDetailsScreen(
@@ -68,7 +81,8 @@ private fun LoadedContent(
     onBackClick: () -> Unit,
 ) {
     Column(
-        modifier = Modifier.fillMaxSize().padding(paddingValues).padding(Padding.SizeXS),
+        modifier = Modifier.fillMaxSize().padding(paddingValues).padding(Padding.SizeXS)
+            .testTag(LOADED_CONTENT_TEST_TAG),
     ) {
         IconButton(
             onClick = onBackClick,
@@ -103,7 +117,7 @@ private fun LoadedContent(
                 param.artDetails.title ?: stringResource(R.string.title_unknown)
             ),
             style = MaterialTheme.typography.titleLarge,
-            modifier = Modifier.padding(bottom = Padding.SizeXXXS),
+            modifier = Modifier.padding(bottom = Padding.SizeXXXS).testTag(TITLE_TEST_TAG),
         )
         Row(modifier = Modifier.fillMaxWidth().padding(bottom = Padding.SizeXXXS), horizontalArrangement = Arrangement.SpaceBetween) {
             Text(
@@ -113,14 +127,16 @@ private fun LoadedContent(
                         ?: stringResource(R.string.art_details_no_description)
                 ),
                 style = MaterialTheme.typography.bodyMedium,
-                modifier = Modifier.fillMaxWidth(0.7f)
+                modifier = Modifier.fillMaxWidth(0.7f).testTag(DESCRIPTION_TEST_TAG)
             )
             Text(
                 text = stringResource(
                     R.string.art_details_date,
                     param.artDetails.date ?: stringResource(R.string.art_details_date_unknown)
                 ),
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = Modifier.testTag(DATE_TEST_TAG)
+
             )
         }
         Text(
@@ -128,7 +144,8 @@ private fun LoadedContent(
                 R.string.art_details_artist,
                 param.artDetails.artist ?: stringResource(R.string.artist_unknown)
             ),
-            style = MaterialTheme.typography.bodyMedium
+            style = MaterialTheme.typography.bodyMedium,
+            modifier = Modifier.testTag(ARTIST_TEST_TAG)
         )
     }
 }
